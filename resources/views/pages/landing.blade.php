@@ -3,12 +3,11 @@
 @section('content')
     <div class="landing-page">
         <header
-            class="h-[calc(100vh+60px)] bg-[linear-gradient(rgba(0,0,0,0.3),rgba(10,30,0,0.6)),url('/public/images/landing-header-bg.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
-            <div class="container text-center text-white h-full px-4 mx-auto grid place-content-center">
-
+            class="h-[calc(70vh+200px)] lg:h-[calc(100vh+200px)] bg-[linear-gradient(rgba(0,0,0,0.3),rgba(10,30,0,0.6)),url('/public/images/landing-header-bg.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
+            <div class="container text-center text-white h-full lg:h-screen px-4 mx-auto grid place-content-center">
                 {{-- Eyebrow --}}
                 <a href="/"
-                    class="bg-white/30 hover:bg-white hover:text-gray-700 hover:-translate-y-1 backdrop-blur rounded-full px-5 py-2 max-w-max mx-auto mb-7 transition duration-300">
+                    class="text-sm bg-white/30 hover:bg-white hover:text-gray-700 hover:-translate-y-1 backdrop-blur rounded-full px-5 py-2 max-w-max mx-auto mb-7 transition duration-300">
                     <i class="fa-solid fa-bullhorn text-green-500 mr-2"></i> Download aplikasi BMKG sekarang
                     <i class="fa-solid fa-angle-right"></i>
                 </a>
@@ -44,6 +43,10 @@
                             </div>
                         </div>
                     @endfor
+
+                    <a href="" class="px-5 py-3 mx-auto md:col-span-4 rounded-full border border-green-700 text-green-700 hover:bg-green-700 hover:text-white mt-5 transition duration-200">
+                      Berita lainnya
+                    </a>
                 </div>
             </div>
         </section>
