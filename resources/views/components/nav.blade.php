@@ -11,7 +11,7 @@
             <li><a href="/layanan"
                     class="hover:bg-green-700 hover:text-white rounded-full visited:text-green-900 px-5 py-3 transition duration-200">Layanan</a>
             </li>
-            <li><a href="/layanan"
+            <li><a href="/berita"
                     class="hover:bg-green-700 hover:text-white rounded-full visited:text-green-900 px-5 py-3 transition duration-200">Berita</a>
             </li>
         </ul>

@@ -21,8 +21,7 @@
         <section class="latest-news -mt-[140px]">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-white text-3xl mb-3">Berita Terkini</h3>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
                     @for ($i = 0; $i < 4; $i++)
                         <div class="rounded-md bg-white overflow-hidden shadow-lg">
                             <a href="/"><img src="{{ asset('/images/landing-header-bg.jpg') }}"
@@ -43,11 +42,11 @@
                             </div>
                         </div>
                     @endfor
-
-                    <a href="" class="px-5 py-3 mx-auto md:col-span-4 rounded-full border border-green-700 text-green-700 hover:bg-green-700 hover:text-white mt-5 transition duration-200">
-                      Berita lainnya
-                    </a>
                 </div>
+
+                <a href="/berita" class="block max-w-max px-10 py-3 mx-auto mt-5 rounded-full border border-green-700 text-green-700 hover:bg-green-700 hover:text-white transition duration-200">
+                    Berita lainnya
+                </a>
             </div>
         </section>
 
@@ -76,6 +75,7 @@
                     <a href="/">Beranda</a>
                     <a href="/">Tentang kami</a>
                     <a href="/">Layanan</a>
+                    <a href="/">Berita</a>
                 </div>
             </div>
 
