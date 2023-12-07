@@ -48,7 +48,7 @@
             </div>
         </header>
 
-        <section class="latest-news -mt-[140px]">
+        <section id="layanan" class="layanan -mt-[240px] pt-[100px]">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-white text-3xl mb-3">Layanan kami</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
@@ -68,7 +68,7 @@
             </div>
         </section>
 
-        <section class="latest-news mt-10">
+        <section id="latestNews" class="latest-news mt-10">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-3xl mb-3">Berita Terkini</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
