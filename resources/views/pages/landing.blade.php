@@ -1,5 +1,34 @@
 @extends('layouts.main')
 
+@php
+    $layanan = [
+        [
+            'images' => '/images/layanan-sewa-alat.svg',
+            'nama' => 'Sewa Alat',
+            'url' => '/layanan/sewa-alat',
+            'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/layanan-konsultasi.svg',
+            'nama' => 'Konsultasi',
+            'url' => '/layanan/konsultasi',
+            'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/layanan-klaim-asuransi.svg',
+            'nama' => 'Klaim Asuransi',
+            'url' => '/layanan/klaim-asuransi',
+            'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/layanan-peta-sebaran.svg',
+            'nama' => 'Peta Sebaran',
+            'url' => '/layanan/peta-sebaran',
+            'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+    ];
+@endphp
+
 @section('content')
     <div class="landing-page">
         <header
@@ -20,7 +49,27 @@
 
         <section class="latest-news -mt-[140px]">
             <div class="container px-4 mx-auto">
-                <h3 class="font-bold text-white text-3xl mb-3">Berita Terkini</h3>
+                <h3 class="font-bold text-white text-3xl mb-3">Layanan kami</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
+                    {{-- @dd($layanan[0]['images']) --}}
+                    @foreach ($layanan as $item)
+                        <a href="{{ $item['url'] }}" class="rounded-md bg-white overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition duration-200">
+                            <img src="{{ asset($item['images']) }}" alt="{{ $item['nama'] }}" height="200">
+                            <div class="text px-4 py-3">
+                                <h4 class="font-bold text-xl">
+                                    {{ $item['nama'] }}
+                                </h4>
+                                <p class="hidden md:inline-block">{{ $item['deskripsi'] }}</p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-news mt-10">
+            <div class="container px-4 mx-auto">
+                <h3 class="font-bold text-3xl mb-3">Berita Terkini</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
                     @for ($i = 0; $i < 4; $i++)
                         <div class="rounded-md bg-white overflow-hidden shadow-lg">
@@ -49,43 +98,5 @@
                 </a>
             </div>
         </section>
-
-        <div class="container mx-auto my-10">
-            <hr>
-        </div>
-
-        <footer>
-            <div class="container grid grid-cols-2 grid-rows-2 md:grid-cols-6 md:grid-rows-1 gap-5 px-4 mx-auto">
-                <div class="col-span-2 md:col-span-3 lg:col-span-2 flex gap-5">
-                    <img src="{{ asset('/images/logo-bmkg.png') }}" alt="BMKG Geofisika Yogyakarta" class="h-[100px]">
-
-                    <div>
-                        <h4 class="font-bold text-xl mb-2">Alamat</h4>
-                        <p class="text-gray-400">Jl. Kabupaten Km 5.5 Duwet Sendangadi Mlati Sleman, Yogyakarta 55285</p>
-                    </div>
-                </div>
-
-                <div class="md:col-start-5 flex flex-col">
-                    <h4 class="font-bold text-xl mb-2">Media Sosial</h4>
-                    <a href="/"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                    <a href="/"><i class="fa-brands fa-twitter"></i> Twitter/X</a>
-                </div>
-                <div class="flex flex-col">
-                    <h4 class="font-bold text-xl mb-2">Sitemap</h4>
-                    <a href="/">Beranda</a>
-                    <a href="/">Tentang kami</a>
-                    <a href="/">Layanan</a>
-                    <a href="/">Berita</a>
-                </div>
-            </div>
-
-            <div class="text-center bg-gray-800 text-white py-5 mt-10">
-                <div class="container px-4 mx-auto">
-                    <p class="text-gray-400 mt-2">
-                        Copyright &copy; <?php echo date('Y'); ?> by Whelly, Uwi, Vicky, Rachel & Hanif - All Rights Reserved
-                    </p>
-                </div>
-            </div>
-        </footer>
     </div>
 @endsection

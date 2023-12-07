@@ -25,6 +25,7 @@
 <body>
     @include('components.nav')
     @yield('content')
+    @include('components.footer')
 
     {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script>
