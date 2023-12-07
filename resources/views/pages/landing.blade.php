@@ -35,7 +35,8 @@
             class="h-[calc(70vh+200px)] lg:h-[calc(100vh+200px)] bg-[linear-gradient(rgba(0,0,0,0.3),rgba(10,30,0,0.6)),url('/public/images/landing-header-bg.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
             <div class="container text-center text-white h-full lg:h-screen px-4 mx-auto grid place-content-center">
                 {{-- Eyebrow --}}
-                <a href="/"
+                <a href="https://apps.bmkg.go.id/"
+                    target="__blank"
                     class="text-sm bg-white/30 hover:bg-white hover:text-gray-700 hover:-translate-y-1 backdrop-blur rounded-full px-5 py-2 max-w-max mx-auto mb-7 transition duration-300">
                     <i class="fa-solid fa-bullhorn text-green-500 mr-2"></i> Download aplikasi BMKG sekarang
                     <i class="fa-solid fa-angle-right"></i>

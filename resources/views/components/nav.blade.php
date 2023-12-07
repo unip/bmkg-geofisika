@@ -1,4 +1,4 @@
-<nav class="h-[60px] md:h-[70px] px-4 py-3 fixed w-full top-0 bg-white/60 backdrop-blur-md z-10">
+<nav class="h-[60px] md:h-[70px] px-4 py-3 fixed w-full top-0 bg-white/80 backdrop-blur-md z-10">
     <div class="container h-full mx-auto flex gap-3 items-center">
         <a href="/" class="flex font-bold gap-2 items-center">
             <img src="{{ asset('images/logo-bmkg.png') }}" class="h-[36px]" alt="BMKG">
@@ -16,7 +16,8 @@
             </li>
         </ul>
 
-        <button type="button" class="block md:hidden px-3 py-1 rounded ml-auto focus:ring-1 ring-green-700"><i
-                class="fa-solid fa-bars"></i></button>
+        <button type="button" class="block md:hidden px-3 py-1 rounded ml-auto focus:ring-1 ring-green-700">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </div>
 </nav>
