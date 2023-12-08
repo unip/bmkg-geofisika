@@ -32,7 +32,7 @@
 @section('content')
     <div class="landing-page">
         <header
-            class="h-[calc(70vh+200px)] lg:h-[calc(100vh+200px)] bg-[linear-gradient(rgba(0,0,0,0.3),rgba(10,30,0,0.6)),url('/public/images/landing-header-bg.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
+            class="h-[calc(70vh+200px)] lg:h-[calc(100vh+200px)] bg-[linear-gradient(rgba(0,0,0,0.4),rgba(10,30,0,0.6)),url('/public/images/slides/1.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
             <div class="container text-center text-white h-full lg:h-screen px-4 mx-auto grid place-content-center">
                 {{-- Eyebrow --}}
                 <a href="https://apps.bmkg.go.id/"
