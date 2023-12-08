@@ -99,5 +99,9 @@
                 </a>
             </div>
         </section>
+
+        <div class="container mx-auto mt-10">
+            <hr>
+        </div>
     </div>
 @endsection

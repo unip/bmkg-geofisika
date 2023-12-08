@@ -1,8 +1,4 @@
-<div class="container mx-auto my-10">
-  <hr>
-</div>
-
-<footer>
+<footer class="pt-10">
   <div class="container grid grid-cols-2 grid-rows-2 md:grid-cols-6 md:grid-rows-1 gap-5 px-4 mx-auto">
       <div class="col-span-2 md:col-span-3 lg:col-span-2 flex gap-5">
           <img src="{{ asset('/images/logo-bmkg.png') }}" alt="BMKG Geofisika Yogyakarta" class="h-[100px]">
