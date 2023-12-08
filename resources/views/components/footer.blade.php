@@ -1,4 +1,4 @@
-<footer class="pt-10">
+<footer class="pt-10 dark:bg-gray-800 dark:text-white">
   <div class="container grid grid-cols-2 grid-rows-2 md:grid-cols-6 md:grid-rows-1 gap-5 px-4 mx-auto">
       <div class="col-span-2 md:col-span-3 lg:col-span-2 flex gap-5">
           <img src="{{ asset('/images/logo-bmkg.png') }}" alt="BMKG Geofisika Yogyakarta" class="h-[100px]">
@@ -23,7 +23,7 @@
       </div>
   </div>
 
-  <div class="text-center text-sm bg-gray-800 text-white py-5 mt-10">
+  <div class="text-center text-sm bg-gray-800 dark:bg-gray-900 text-white py-5 mt-10">
       <div class="container max-w-lg px-4 mx-auto">
           <p class="text-gray-400 mt-2">
               The website is formed by Afif Whelly Artissandi, Wuri Handayani, Marjona Vicky, Rachel Meisya,

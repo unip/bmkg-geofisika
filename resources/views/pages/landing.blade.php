@@ -27,10 +27,37 @@
             'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
         ],
     ];
+
+    $berita = [
+        [
+            'images' => '/images/slides/1.jpg',
+            'dateCreated' => '2023-12-08 22:08:48',
+            'title' => 'Lorem ipsum dolor sit, amet consectetur adipisicing.',
+            'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/slides/2.jpg',
+            'dateCreated' => '2023-12-08 22:08:48',
+            'title' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+            'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/slides/3.jpg',
+            'dateCreated' => '2023-12-08 22:08:48',
+            'title' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+            'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+        [
+            'images' => '/images/slides/4.jpg',
+            'dateCreated' => '2023-12-08 22:08:48',
+            'title' => 'Lorem ipsum, dolor sit amet consectetur adipisicing.',
+            'excerpt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.'
+        ],
+    ];
 @endphp
 
 @section('content')
-    <div class="landing-page">
+    <div class="landing-page dark:bg-gray-800 dark:text-white">
         <header
             class="h-[calc(70vh+200px)] lg:h-[calc(100vh+200px)] bg-[linear-gradient(rgba(0,0,0,0.4),rgba(10,30,0,0.6)),url('/public/images/slides/1.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
             <div class="container text-center text-white h-full lg:h-screen px-4 mx-auto grid place-content-center">
@@ -51,16 +78,16 @@
         <section id="layanan" class="layanan -mt-[240px] pt-[100px]">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-white text-3xl mb-3">Layanan kami</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
                     {{-- @dd($layanan[0]['images']) --}}
                     @foreach ($layanan as $item)
-                        <a href="{{ $item['url'] }}" class="rounded-md bg-white overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition duration-200">
+                        <a href="{{ $item['url'] }}" class="rounded-md bg-white dark:bg-gray-700 overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition duration-200">
                             <img src="{{ asset($item['images']) }}" alt="{{ $item['nama'] }}" height="200">
                             <div class="text px-4 py-3">
                                 <h4 class="font-bold text-xl">
                                     {{ $item['nama'] }}
                                 </h4>
-                                <p class="hidden md:inline-block">{{ $item['deskripsi'] }}</p>
+                                <p class="hidden md:inline-block dark:text-gray-400">{{ $item['deskripsi'] }}</p>
                             </div>
                         </a>
                     @endforeach
@@ -71,27 +98,25 @@
         <section id="latestNews" class="latest-news mt-10">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-3xl mb-3">Berita Terkini</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 backdrop-blur-lg rounded-lg p-5">
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="rounded-md bg-white overflow-hidden shadow-lg">
-                            <a href="/"><img src="{{ asset('/images/landing-header-bg.jpg') }}"
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
+                    @foreach ($berita as $artikel)
+                        <div class="rounded-md bg-white dark:bg-gray-700 overflow-hidden shadow-lg">
+                            <a href="/berita/{{ Str::kebab($artikel['title']) }}"><img src="{{ asset($artikel['images']) }}"
                                     class="w-full h-[200px] object-cover" alt="Title"></a>
 
                             <div class="text px-4 py-3">
                                 <h4 class="font-bold text-xl">
-                                    <a href="/"
-                                        class="hover:visited:text-green-700 transition duration-200 overflow-hidden">
-                                        A very long article title in the landing page
+                                    <a href="/berita/{{ Str::kebab($artikel['title']) }}" class="hover:visited:text-green-700 dark:hover:visited:text-green-600 transition duration-200 overflow-hidden">
+                                        {{ $artikel['title'] }}
                                     </a>
                                 </h4>
-                                <small class="text-gray-400">Minggu, 4 Desember 2023</small>
-                                <p class="hidden md:inline-block">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Dolorum sapiente recusandae
-                                    mollitia
-                                    omnis alias possimus officia.</p>
+                                <small class="text-gray-400 dark:text-gray-500">{{ \Carbon\Carbon::parse($artikel['dateCreated'])->isoFormat('dddd, d MMMM Y') }}</small>
+                                <p class="hidden md:inline-block dark:text-gray-400">{{ $artikel['excerpt'] }}</p>
                             </div>
+
+                            {{-- @dd(date('Y-m-d H:i:s')) --}}
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
 
                 <a href="/berita" class="block max-w-max px-10 py-3 mx-auto mt-5 rounded-full border border-green-700 text-green-700 hover:bg-green-700 hover:text-white transition duration-200">
@@ -101,7 +126,7 @@
         </section>
 
         <div class="container mx-auto mt-10">
-            <hr>
+            <hr class="dark:border-white/20">
         </div>
     </div>
 @endsection
