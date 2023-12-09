@@ -1,7 +1,7 @@
-<p align="center">
+<h1 align="center">
   <img src="https://github.com/unip/bmkg-geofisika/blob/main/public/images/logo-bmkg.png?raw=true" width="100" > <br>
   BMKG Yogyakarta
-</p>
+</h1>
 
 <p align="center">Projek kelompok mata kuliah e-Government 2023</p>
 
