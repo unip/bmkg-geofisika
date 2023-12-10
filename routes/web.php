@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/berita', function () {
     return view('pages.berita');
-});
+})->name('berita');
 
 Route::get('/tentang-kami', function () {
     return view('pages.tentang-kami');
