@@ -18,7 +18,7 @@
           <h4 class="font-bold text-xl mb-2">Sitemap</h4>
           <a href="/" class="hover:text-black/50 visited:text-green-700">Beranda</a>
           <a href="/tentang-kami" class="hover:text-black/50 visited:text-green-700">Tentang kami</a>
-          <a href="/layanan" class="hover:text-black/50 visited:text-green-700">Layanan</a>
+          <a href="/#layanan" class="hover:text-black/50 visited:text-green-700">Layanan</a>
           <a href="/berita" class="hover:text-black/50 visited:text-green-700">Berita</a>
       </div>
   </div>
