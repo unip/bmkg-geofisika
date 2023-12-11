@@ -78,7 +78,7 @@
         <section id="layanan" class="layanan -mt-[240px] pt-[100px]">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-white text-3xl mb-3">Layanan kami</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
                     {{-- @dd($layanan[0]['images']) --}}
                     @foreach ($layanan as $item)
                         <a href="{{ $item['url'] }}" class="rounded-md bg-white dark:bg-gray-700 overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-xl transition duration-200">
@@ -98,7 +98,7 @@
         <section id="latestNews" class="latest-news mt-10">
             <div class="container px-4 mx-auto">
                 <h3 class="font-bold text-3xl mb-3">Berita Terkini</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-white/70 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
                     @foreach ($berita as $artikel)
                         <div class="rounded-md bg-white dark:bg-gray-700 overflow-hidden shadow-lg">
                             <a href="/berita/{{ Str::kebab($artikel['title']) }}"><img src="{{ asset($artikel['images']) }}"

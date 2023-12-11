@@ -41,7 +41,16 @@ Route::middleware('auth')->group(function () {
         })->name('layanan');
         Route::get('/sewa-alat', function () {
             return view('pages.layanan.sewa-alat');
-        });
+        })->name('sewa-alat');
+        Route::get('/konsultasi', function () {
+            return view('pages.layanan.konsultasi');
+        })->name('konsultasi');
+        Route::get('/klaim-asuransi', function () {
+            return view('pages.layanan.klaim-asuransi');
+        })->name('klaim-asuransi');
+        Route::get('/peta-sebaran', function () {
+            return view('pages.layanan.peta-sebaran');
+        })->name('peta-sebaran');
     });
 });
 
