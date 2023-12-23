@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SewaAlatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,19 +37,34 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::group(['prefix' => '/layanan'], function () {
-        Route::get('/', function () {
-            return view('pages.layanan.index');
-        })->name('layanan');
-        Route::get('/sewa-alat', function () {
-            return view('pages.layanan.sewa-alat');
-        })->name('sewa-alat');
+    /* ---------------------------------------------------------------------
+     | PROTECTED ROUTES
+     | ---------------------------------------------------------------------
+     */
+    Route::prefix('layanan')->group(function () {
+        Route::get('/', [LayananController::class, 'index'])->name('layanan');
+
+        Route::name('sewa-alat.')
+            ->prefix('sewa-alat')
+            ->controller(SewaAlatController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('sewa-alat'); // index halaman sewa alat
+                Route::get('/{alat}/permohonan', 'list')->name('sewa-alat-list'); // list permohonan sewa alat
+                Route::get('/{alat}/permohonan/{id}', 'single')->name('sewa-alat-single'); // mendapatkan satu data permohonan
+                Route::get('/{alat}/permohonan/tambah', 'create')->name('sewa-alat-create'); // menampilkan form permohonan sewa alat
+                Route::post('/{alat}/permohonan/tambah', 'store')->name('sewa-alat-store'); // submit permohonan sewa alat
+                Route::put('/{alat}/permohonan/{id}/ubah', 'update')->name('sewa-alat-update'); // ubaha data permohonan by id
+                Route::put('/{alat}/permohonan/{id}/hapus', 'delete')->name('sewa-alat-delete'); // hapus data permohonan by id
+            });
+
         Route::get('/konsultasi', function () {
             return view('pages.layanan.konsultasi');
         })->name('konsultasi');
+
         Route::get('/klaim-asuransi', function () {
             return view('pages.layanan.klaim-asuransi');
         })->name('klaim-asuransi');
+
         Route::get('/peta-sebaran', function () {
             return view('pages.layanan.peta-sebaran');
         })->name('peta-sebaran');

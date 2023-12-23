@@ -41,7 +41,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="font-bold text-3xl mb-3">Layanan kami</h3>
                     <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
+                        class="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg rounded-lg p-5">
                         {{-- @dd($layanan[0]['images']) --}}
                         @foreach ($layanan as $item)
                             <a href="{{ $item['url'] }}"
