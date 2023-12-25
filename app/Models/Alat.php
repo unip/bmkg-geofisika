@@ -15,4 +15,9 @@ class Alat extends Model
         'deskripsi',
         'tersedia',
     ];
+
+    public function permohonan()
+    {
+        return $this->hasMany(SewaAlat::class);
+    }
 }

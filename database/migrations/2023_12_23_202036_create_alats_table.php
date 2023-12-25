@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('alats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->unique();
+            $table->string('slug')->unique();
             $table->decimal('harga');
             $table->string('image')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->boolean('tersedia')->default(false);
+            $table->integer('unit')->default(1);
             $table->timestamps();
         });
     }
