@@ -17,6 +17,6 @@ class SewaAlat extends Model
 
     public function alat()
     {
-        return $this->belongsTo(SewaAlat::class);
+        return $this->belongsTo(Alat::class);
     }
 }

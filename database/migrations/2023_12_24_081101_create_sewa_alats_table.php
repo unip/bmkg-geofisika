@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('sewa_alats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_penyewa');
-            $table->text('alamat');
-            $table->string('no_hp')->unique();
-            $table->string('instansi')->nullable();
-            $table->foreignId('alat_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('alat_id');
+            $table->foreignId('user_id');
             $table->integer('lama_sewa_hari')->default(1);
+            $table->integer('banyak_unit')->default(1);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alat;
 use App\Models\SewaAlat;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,39 +13,49 @@ class SewaAlatController extends Controller
     public function index()
     {
         $alats = Alat::where('unit', '>', 0)->get();
-        $permohonans = SewaAlat::all();
-        return view('pages.layanan.sewa-alat.index', ['alats' => $alats, 'permohonans' => $permohonans]);
+        $permohonan = SewaAlat::all();
+        return view('pages.layanan.sewa-alat.index', ['alats' => $alats, 'permohonan' => $permohonan]);
     }
 
     public function create(Alat $alat)
     {
-        return view('pages.layanan.sewa-alat.permohonan', ['alat' => $alat]);
+        $permohonan = SewaAlat::all();
+        return view('pages.layanan.sewa-alat.permohonan', ['alat' => $alat, 'permohonan' => $permohonan]);
     }
 
     public function store(Request $request, Alat $alat)
     {
-        $request->validate([
-            'nama_penyewa' => 'required|max:255',
-            'alamat' => 'nullable',
-            'no_hp' => 'required|unique:sewa_alats',
-            'instansi' => 'nullable',
-            'alat_id' => 'required',
-            'user_id' => 'required',
+        // dd($request->all(), $alat);
+
+        $validated = $request->validate([
             'lama_sewa_hari' => 'required',
+            'banyak_unit' => 'required',
+            'keterangan' => 'nullable',
             'syarat' => 'required',
         ]);
 
-        $data = [
-            'nama_penyewa' => $request->nama_penyewa,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'instansi' => $request->instansi,
-            'alat_id' => $alat->id,
-            'user_id' => Auth::id(),
-            'lama_sewa_hari' => $request->nama_sewa_hari,
-        ];
+        $data = $validated;
+        $data['alat_id'] = $alat->id;
+        $data['user_id'] = Auth::id();
 
-        SewaAlat::create($data);
-        return redirect()->route('sewa-alat.create', $alat->slug)->with('success', 'Permohonan berhasil dibuat');
+        // Cek jika unit tersedia lebih sedikit dari banyak permohonan
+        // maka return error
+        if ($alat->unit < $data['banyak_unit']) {
+            return back()->with('error', 'Alat yang tersedia tidak cukup');
+        }
+
+        try {
+            // buat permohonan
+            SewaAlat::create($data);
+
+            // update jumlah unit tersedia di tabel alat
+            $alat->update(['unit' => $alat->unit - $data['banyak_unit']]);
+
+            // sukses membuat permohonan
+            return back()->with('success', 'Permohonan berhasil dibuat');
+        } catch (Exception $error) {
+            report($error->getMessage());
+            return back()->with('error', 'Permohonan gagal dibuat');
+        }
     }
 }

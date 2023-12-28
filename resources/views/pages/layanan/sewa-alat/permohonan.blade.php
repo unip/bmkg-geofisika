@@ -30,10 +30,25 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('sewa-alat.store', $alat->slug) }}" class="grid grid-cols-1 gap-3">
+                    @if (session('error'))
+                        <div class="bg-red-200 text-red-900 px-4 py-2 rounded mb-4 shadow">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="bg-red-200 text-red-900 px-4 py-2 rounded mb-4 shadow">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('sewa-alat.store', $alat) }}" method="POST" class="grid grid-cols-1 gap-3">
                         @csrf
-                        @method('post')
-                        <div>
+                        {{-- <div>
                             <x-input-label for="nama_penyewa">Nama penyewa</x-input-label>
                             <x-text-input id="nama_penyewa" class="block mt-1 w-full" type="text" name="nama_penyewa"
                                 :value="old('nama_penyewa')" required autofocus />
@@ -59,17 +74,32 @@
                             <x-text-input id="instansi" class="block mt-1 w-full" type="text" name="instansi"
                                 :value="old('instansi')" required />
                             <x-input-error :messages="$errors->get('instansi')" class="mt-2" />
+                        </div> --}}
+
+                        <div>
+                            <x-input-label for="banyak_unit">Banyak unit</x-input-label>
+                            <x-text-input id="banyak_unit" class="block mt-1 w-full" type="number" name="banyak_unit"
+                                value="1" :value="old('banyak_unit')" required />
+                            <x-input-error :messages="$errors->get('banyak_unit')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="lama_sewa_hari">Lama sewa</x-input-label>
+                            <x-input-label for="lama_sewa_hari">Lama sewa (hari)</x-input-label>
                             <x-text-input id="lama_sewa_hari" class="block mt-1 w-full" type="number"
                                 name="lama_sewa_hari" :value="old('lama_sewa_hari')" required />
                             <x-input-error :messages="$errors->get('lama_sewa_hari')" class="mt-2" />
                         </div>
 
-                        <label for="syarat">
-                            <input type="checkbox" name="syarat" id="syarat" class="rounded">
+                        <div>
+                            <x-input-label for="keterangan">Keterangan</x-input-label>
+                            <textarea id="keterangan"
+                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                                rows="3" name="keterangan" :value="old('keterangan')"></textarea>
+                            <x-input-error :messages="$errors->get('keterangan')" class="mt-2" />
+                        </div>
+
+                        <label for="syarat" class="mt-5 mb-3">
+                            <input type="checkbox" name="syarat" id="syarat" class="rounded" required>
                             Saya menyetujui <a href="" class="underline hover:text-green-500">syarat dan
                                 ketentuan</a> yang berlaku
                         </label>
@@ -92,9 +122,37 @@
                             <img src="{{ asset('images/alat-tidak-tersedia.svg') }}" alt="" width="200">
                             <p>Belum ada permohonan</p>
                         </div>
+                    @else
+                        <table class="table-auto rounded overflow-hidden dark:text-slate-400">
+                            <thead class="bg-slate-200 dark:bg-slate-900 border-b border-b-slate-500">
+                                <tr>
+                                    <th class="p-3 text-left">Tanggal</th>
+                                    <th class="p-3 text-left">Lama pinjam</th>
+                                    <th class="p-3 text-left">Banyak unit</th>
+                                    <th class="p-3 text-left">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($permohonan as $item)
+                                    <tr
+                                        class="border-b border-b-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 transition duration-200">
+                                        <td class="p-3 align-top">
+                                            {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
+                                        </td>
+                                        <td class="p-3 align-top">
+                                            {{ $item->lama_sewa_hari }} hari
+                                        </td>
+                                        <td class="p-3 align-top">
+                                            {{ $item->banyak_unit }} unit
+                                        </td>
+                                        <td class="p-3 align-top font-bold text-white">
+                                            Rp{{ number_format($alat->harga * ($item->lama_sewa_hari * $item->banyak_unit), 0, ',', '.') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     @endif
-
-
                 </div>
             </div>
         </div>

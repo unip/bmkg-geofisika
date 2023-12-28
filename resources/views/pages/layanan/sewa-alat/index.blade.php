@@ -35,6 +35,7 @@
                                         {{ 'Rp' . number_format((float) $a->harga, 0, ',', '.') }}
                                     </p>
                                     <p class="text-lg opacity-50">{{ $a->deskripsi }}</p>
+                                    <p class="text-lg opacity-50">Tersedia: {{ $a->unit }} unit</p>
                                 </div>
                             </a>
                         @endforeach
