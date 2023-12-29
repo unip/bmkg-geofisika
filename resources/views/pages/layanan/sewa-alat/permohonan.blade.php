@@ -17,7 +17,15 @@
 
     <div class="py-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 max-w-7xl mx-auto sm:px-6 lg:px-8 gap-3">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white relative dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                @if ($alat->unit == 0)
+                    <div
+                        class="maaf absolute h-full w-full bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center text-center p-10">
+                        <img src="{{ asset('images/image-sory.svg') }}" alt="" width="200" height="200">
+                        <h2 class="text-3xl font-bold">Maaf...</h2>
+                        <p class="text-xl text-slate-500">Semua alat sedang dalam peminjaman</p>
+                    </div>
+                @endif
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h2
                         class="flex items-center font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4">
@@ -25,13 +33,13 @@
                     </h2>
 
                     @if (session('success'))
-                        <div class="bg-green-300 text-green-900 px-4 py-2 rounded mb-4 shadow">
+                        <div class="bg-green-300 text-green-900 px-4 py-2 rounded mb-4">
                             {{ session('success') }}
                         </div>
                     @endif
 
                     @if (session('error'))
-                        <div class="bg-red-200 text-red-900 px-4 py-2 rounded mb-4 shadow">
+                        <div class="bg-red-200 text-red-900 px-4 py-2 rounded mb-4">
                             {{ session('error') }}
                         </div>
                     @endif
@@ -48,33 +56,6 @@
 
                     <form action="{{ route('sewa-alat.store', $alat) }}" method="POST" class="grid grid-cols-1 gap-3">
                         @csrf
-                        {{-- <div>
-                            <x-input-label for="nama_penyewa">Nama penyewa</x-input-label>
-                            <x-text-input id="nama_penyewa" class="block mt-1 w-full" type="text" name="nama_penyewa"
-                                :value="old('nama_penyewa')" required autofocus />
-                            <x-input-error :messages="$errors->get('nama_penyewa')" class="mt-2" />
-                        </div>
-
-                        <div>
-                            <x-input-label for="alamat">Alamat</x-input-label>
-                            <x-text-input id="alamat" class="block mt-1 w-full" type="text" name="alamat"
-                                :value="old('alamat')" />
-                            <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
-                        </div>
-
-                        <div>
-                            <x-input-label for="no_hp">Nomor HP</x-input-label>
-                            <x-text-input id="no_hp" class="block mt-1 w-full" type="text" name="no_hp"
-                                :value="old('no_hp')" required />
-                            <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
-                        </div>
-
-                        <div>
-                            <x-input-label for="instansi">Instansi</x-input-label>
-                            <x-text-input id="instansi" class="block mt-1 w-full" type="text" name="instansi"
-                                :value="old('instansi')" required />
-                            <x-input-error :messages="$errors->get('instansi')" class="mt-2" />
-                        </div> --}}
 
                         <div>
                             <x-input-label for="banyak_unit">Banyak unit</x-input-label>
@@ -123,8 +104,8 @@
                             <p>Belum ada permohonan</p>
                         </div>
                     @else
-                        <table class="table-auto rounded overflow-hidden dark:text-slate-400">
-                            <thead class="bg-slate-200 dark:bg-slate-900 border-b border-b-slate-500">
+                        <table class="table-auto rounded overflow-hidden text-slate-600 dark:text-slate-400">
+                            <thead class="bg-slate-100 dark:bg-slate-900 border-b border-b-slate-300">
                                 <tr>
                                     <th class="p-3 text-left">Tanggal</th>
                                     <th class="p-3 text-left">Lama pinjam</th>
@@ -133,9 +114,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($permohonan as $item)
+                                @foreach ($alat->permohonan as $item)
                                     <tr
-                                        class="border-b border-b-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 transition duration-200">
+                                        class="border-b border-b-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition duration-200">
                                         <td class="p-3 align-top">
                                             {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                                         </td>
@@ -145,7 +126,7 @@
                                         <td class="p-3 align-top">
                                             {{ $item->banyak_unit }} unit
                                         </td>
-                                        <td class="p-3 align-top font-bold text-white">
+                                        <td class="p-3 align-top font-bold dark:text-white">
                                             Rp{{ number_format($alat->harga * ($item->lama_sewa_hari * $item->banyak_unit), 0, ',', '.') }}
                                         </td>
                                     </tr>
