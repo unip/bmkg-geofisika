@@ -13,7 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,600&display=swap" rel="stylesheet" />
 
     {{-- Resource --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/@fortawesome/fontawesome-free/js/all.min.js'])
 
     <style>
         :root {
@@ -28,7 +28,7 @@
     @include('components.footer')
 
     {{-- Font Awesome --}}
-    <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script> --}}
 </body>
 
 </html>

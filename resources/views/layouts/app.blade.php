@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/@fortawesome/fontawesome-free/js/all.min.js'])
 </head>
 
 <body class="font-sans antialiased">
@@ -28,13 +28,19 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="relative">
             {{ $slot }}
+
+            <a href="{{ route('kontak') }}"
+                class="group fixed bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow-xl bottom-5 right-5 transition duration-200">
+                <i class="fa-regular fa-circle-question"></i>
+                Ada pertanyaan?
+            </a>
         </main>
     </div>
 
     {{-- Font Awesome --}}
-    <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script> --}}
 </body>
 
 </html>

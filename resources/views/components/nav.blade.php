@@ -17,6 +17,12 @@
                 <a href="/berita"
                     class="hover:bg-green-700 hover:text-white {{ request()->is('berita*') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Berita</a>
             </li>
+            <li>
+                <a href="/kontak"
+                    class="hover:bg-green-700 hover:text-white {{ request()->is('kontak*') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">
+                    Hubungi kami
+                </a>
+            </li>
         </ul>
 
         @if (Auth::user())

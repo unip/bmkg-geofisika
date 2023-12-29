@@ -26,7 +26,11 @@ Route::get('/berita', function () {
 
 Route::get('/tentang-kami', function () {
     return view('pages.tentang-kami');
-});
+})->name('tentang-kami');
+
+Route::get('/kontak', function () {
+    return view('pages.kontak');
+})->name('kontak');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('berita')" :active="request()->is('berita*')">
                         {{ __('Berita') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('kontak')" :active="request()->is('kontak*')">
+                        {{ __('Hubungi kami') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -89,6 +92,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('berita')" :active="request()->is('berita*')">
                 {{ __('Berita') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('kontak')" :active="request()->is('kontak*')">
+                {{ __('Hubungi kami') }}
             </x-responsive-nav-link>
         </div>
 
