@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="flex items-center font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <a href="/layanan" class="text-gray-400 hover:text-green-600">Layanan</a>
-            <i class="fa-solid fa-angle-right mx-2"></i> <span>Sewa Alat</span>
+            <i class="fa-solid fa-angle-right mx-2 text-sm"></i> <span>Sewa Alat</span>
         </h2>
     </x-slot>
 
