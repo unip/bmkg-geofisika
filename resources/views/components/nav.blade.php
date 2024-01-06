@@ -7,19 +7,19 @@
         <ul class="hidden md:flex items-center">
             <li>
                 <a href="/tentang-kami"
-                    class="hover:bg-green-700 hover:text-white {{ request()->is('tentang-kami*') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Tentang</a>
+                    class="hover:bg-green-700 hover:text-white {{ request()->is('tentang-kami*') ? 'bg-green-200 text-green-900 hover:text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Tentang</a>
             </li>
             <li>
                 <a href="{{ Auth::user() ? '/layanan' : '/#layanan' }}"
-                    class="hover:bg-green-700 hover:text-white {{ request()->is('#layanan') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Layanan</a>
+                    class="hover:bg-green-700 hover:text-white {{ request()->is('#layanan') ? 'bg-green-200 text-green-900 hover:text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Layanan</a>
             </li>
             <li>
                 <a href="/berita"
-                    class="hover:bg-green-700 hover:text-white {{ request()->is('berita*') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Berita</a>
+                    class="hover:bg-green-700 hover:text-white {{ request()->is('berita*') ? 'bg-green-200 text-green-900 hover:text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">Berita</a>
             </li>
             <li>
                 <a href="/kontak"
-                    class="hover:bg-green-700 hover:text-white {{ request()->is('kontak*') ? 'bg-green-700 !text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">
+                    class="hover:bg-green-700 hover:text-white {{ request()->is('kontak*') ? 'bg-green-200 text-green-900 hover:text-white' : '' }} dark:text-white rounded-full visited:text-green-900 dark:visited:text-green-600 dark:visited:hover:text-white px-5 py-3 transition duration-200">
                     Hubungi kami
                 </a>
             </li>
