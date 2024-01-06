@@ -7,6 +7,7 @@ use App\Models\SewaAlat;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SewaAlatController extends Controller
 {
@@ -27,9 +28,11 @@ class SewaAlatController extends Controller
     {
         $validated = $request->validate([
             'lama_sewa_hari' => 'required',
-            'banyak_unit' => 'required',
+            'banyak_unit' => ['required', 'integer', 'lte:' . $alat->unit],
             'keterangan' => 'nullable',
             'syarat' => 'required',
+        ], [
+            'banyak_unit.lte' => 'Unit yang dipesan melebihi persediaan'
         ]);
 
         $validated['alat_id'] = $alat->id;
@@ -37,18 +40,21 @@ class SewaAlatController extends Controller
 
         // Cek jika unit tersedia lebih sedikit dari banyak permohonan
         // maka return error
-        if ($alat->unit < $validated['banyak_unit']) {
-            return back()->with('error', 'Alat yang tersedia tidak cukup');
-        }
+        // if ($alat->unit < $validated['banyak_unit']) {
+        //     return back()->with('error', 'Alat yang tersedia tidak cukup');
+        // }
 
         try {
+            DB::beginTransaction();
             // buat permohonan
             SewaAlat::create($validated);
 
             // update jumlah unit tersedia di tabel alat
-            // $alat->update(['unit' => $alat->unit - $validated['banyak_unit']]);
+            $alat->unit = $alat->unit - $validated['banyak_unit'];
+            $alat->save();
 
             // sukses membuat permohonan
+            DB::commit();
             return back()->with('success', 'Permohonan berhasil dibuat');
         } catch (Exception $error) {
             report($error->getMessage());
