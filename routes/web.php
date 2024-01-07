@@ -52,12 +52,12 @@ Route::middleware('auth')->group(function () {
             ->prefix('sewa-alat')
             ->controller(SewaAlatController::class)
             ->group(function () {
-                Route::get('/', 'index')->name('.index'); // index halaman sewa alat
-                Route::get('/{alat:slug}/permohonan/tambah', 'create')->name('create'); // menampilkan form permohonan sewa alat
-                Route::post('/{alat:slug}/permohonan/tambah', 'store')->name('store'); // submit permohonan sewa alat
-                Route::get('/{alat:slug}/permohonan/{id}/ubah', 'change')->name('change'); // menampilkan form ubaha data permohonan by id
-                Route::put('/{alat:slug}/permohonan/{id}/ubah', 'update')->name('update'); // ubaha data permohonan by id
-                Route::delete('/{alat:slug}/permohonan/{id}/hapus', 'delete')->name('delete'); // hapus data permohonan by id
+                Route::get('/', 'index')->name('index'); // index halaman sewa alat
+                Route::get('/permohonan', 'create')->name('create'); // menampilkan form permohonan sewa alat
+                Route::post('/permohonan/tambah', 'store')->name('store'); // submit permohonan sewa alat
+                Route::get('/permohonan/{sewa_alat}/ubah', 'edit')->name('edit'); // menampilkan form ubaha data permohonan by id
+                Route::put('/permohonan/{sewa_alat}/ubah', 'update')->name('update'); // ubaha data permohonan by id
+                Route::delete('/permohonan/{sewa_alat}/hapus', 'destroy')->name('destroy'); // hapus data permohonan by id
             });
 
         Route::get('/konsultasi', function () {

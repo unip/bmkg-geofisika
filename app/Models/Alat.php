@@ -10,9 +10,11 @@ class Alat extends Model
     use HasFactory;
     protected $fillable = [
         'nama',
+        'slug',
         'harga',
         'image',
         'deskripsi',
+        'unit',
         'tersedia',
     ];
 

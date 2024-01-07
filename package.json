@@ -16,6 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.5.1"
+        "@alpinejs/collapse": "^3.13.3",
+        "@fortawesome/fontawesome-free": "^6.5.1",
+        "air-datepicker": "^3.4.0"
     }
 }

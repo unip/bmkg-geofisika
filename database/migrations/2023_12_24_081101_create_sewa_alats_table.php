@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('alat_id');
             $table->foreignId('user_id');
-            $table->integer('lama_sewa_hari')->default(1);
+            $table->string('sewa_mulai');
+            $table->string('sewa_berakhir');
             $table->integer('banyak_unit')->default(1);
             $table->text('keterangan')->nullable();
+            $table->string('status')->default('Belum Lunas');
+            $table->string('expedisi')->nullable();
+            $table->string('resi')->nullable();
             $table->timestamps();
         });
     }

@@ -10,8 +10,10 @@
 
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
+    @yield('styles')
+
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/@fortawesome/fontawesome-free/js/all.min.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
@@ -40,7 +42,9 @@
     </div>
 
     {{-- Font Awesome --}}
-    {{-- <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script> --}}
+    <script src="https://kit.fontawesome.com/1191ef92be.js" crossorigin="anonymous"></script>
+
+    @yield('scripts')
 </body>
 
 </html>
