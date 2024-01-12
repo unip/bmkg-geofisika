@@ -13,7 +13,7 @@ class SewaAlatController extends Controller
 {
     public function index()
     {
-        $alats = Alat::where('unit', '>', 0)->get();
+        $alats = Alat::all();
         $permohonan = SewaAlat::where('user_id', Auth::id())->get();
         return view('pages.layanan.sewa-alat.index', ['permohonan' => $permohonan, 'alats' => $alats]);
     }
@@ -29,13 +29,10 @@ class SewaAlatController extends Controller
 
         $validated = $request->validate([
             'alat_id' => 'required',
-            'banyak_unit' => ['required', 'integer', 'lte:' . $alat->unit],
             'sewa_mulai' => 'required|date',
             'sewa_berakhir' => 'required|date|after_or_equal:sewa_mulai',
             'keterangan' => 'nullable',
             'syarat' => 'required',
-        ], [
-            'banyak_unit.lte' => 'Jumlah unit yang dipesan tidak tersedia'
         ]);
 
         $validated['user_id'] = Auth::id();
@@ -64,16 +61,7 @@ class SewaAlatController extends Controller
         // }
 
         try {
-            DB::beginTransaction();
-            // buat permohonan
             SewaAlat::create($validated);
-
-            // update jumlah unit tersedia di tabel alat
-            $alat->unit = $alat->unit - $validated['banyak_unit'];
-            $alat->save();
-
-            // sukses membuat permohonan
-            DB::commit();
             return back()->with('success', 'Permohonan berhasil dibuat');
         } catch (Exception $error) {
             report($error->getMessage());
@@ -83,8 +71,8 @@ class SewaAlatController extends Controller
 
     public function destroy(SewaAlat $sewa_alat)
     {
-        if ($sewa_alat->status != 'Menunggu' || $sewa_alat->status != 'Belum Lunas') {
-            return back()->with('error', 'Permohonan tidak dapat dibatalkan');
+        if ($sewa_alat->status != 'Menunggu' && $sewa_alat->status != 'Belum Lunas') {
+            return back()->with('error', 'Permohonan tidak dapat dibatalkan karena dalam proses validasi');
         }
 
         try {

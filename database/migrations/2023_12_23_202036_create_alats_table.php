@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('harga');
             $table->string('image')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->integer('unit')->default(1);
             $table->boolean('tersedia')->default(true);
             $table->timestamps();
         });

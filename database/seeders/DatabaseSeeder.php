@@ -19,16 +19,16 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
+            'role' => 'admin',
             'password' => Hash::make('12345678'),
         ]);
-        User::factory(10)->create();
+        User::factory(5)->create();
 
         Alat::create([
             'nama' => 'Proton Magnetometer',
             'slug' => 'proton-magnetometer',
             'harga' => 400000,
             'deskripsi' => 'Per Unit / Per Hari',
-            'unit' => 5,
         ]);
 
         Alat::create([
@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'slug' => 'portable-digital-short-period-seismograph',
             'harga' => 640000,
             'deskripsi' => 'Per Unit / Per Hari',
-            'unit' => 5,
         ]);
 
         Alat::create([
@@ -44,7 +43,6 @@ class DatabaseSeeder extends Seeder
             'slug' => 'gps-geodesi',
             'harga' => 270000,
             'deskripsi' => 'Per Unit / Per Hari',
-            'unit' => 5,
         ]);
     }
 }
