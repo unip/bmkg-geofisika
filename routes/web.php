@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminSewaAlatController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SewaAlatController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,9 +67,9 @@ Route::middleware('auth')->group(function () {
                 Route::get('/permohonan/{sewa_alat}/download', 'download')->name('download-permohonan'); // download permohonan
             });
 
-        Route::get('/konsultasi', function () {
-            return view('pages.layanan.konsultasi');
-        })->name('konsultasi');
+        Route::get('/permohonan-magang', function () {
+            return view('pages.layanan.permohonan-magang');
+        })->name('permohonan-magang');
 
         Route::get('/klaim-asuransi', function () {
             return view('pages.layanan.klaim-asuransi');
@@ -85,7 +86,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('permohonan-magang', AdminPermohonanMagangController::class);
         Route::resource('klaim-asuransi', AdminKlaimAsuransiController::class);
         Route::resource('peta-sebaran', AdminPetaSebaranController::class);
-    });
+    })->middleware('auth.admin');
 });
 
 require __DIR__ . '/auth.php';
