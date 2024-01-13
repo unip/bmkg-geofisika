@@ -18,6 +18,14 @@ return new class extends Migration
             $table->string('role')->default('member');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('npwp')->nullable();
+            $table->string('no_identitas')->unique();
+            $table->string('pekerjaan');
+            $table->string('pendidikan');
+            $table->string('telp')->unique();
+            $table->text('alamat');
+
             $table->rememberToken();
             $table->timestamps();
         });

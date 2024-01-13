@@ -21,8 +21,28 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'role' => 'admin',
             'password' => Hash::make('12345678'),
+
+            'npwp' => fake()->randomNumber(9, true),
+            'no_identitas' => fake()->randomNumber(9, true),
+            'pekerjaan' => 'admin',
+            'pendidikan' => array_rand(['sd', 'smp', 'sma', 'd3', 's1', 's2', 's3']),
+            'telp' => fake()->unique()->e164PhoneNumber(),
+            'alamat' => fake()->address(),
         ]);
         User::factory(5)->create();
+        User::factory()->create([
+            'name' => 'Nihala Nyala Ittaqi',
+            'email' => 'nyala.ittaqi@example.com',
+            'role' => 'member',
+            'password' => Hash::make('12345678'),
+
+            'npwp' => fake()->randomNumber(9, true),
+            'no_identitas' => fake()->unique()->randomNumber(9, true),
+            'pekerjaan' => 'Pelajar',
+            'pendidikan' => array_rand(['sd', 'smp', 'sma', 'd3', 's1', 's2', 's3']),
+            'telp' => fake()->unique()->e164PhoneNumber(),
+            'alamat' => fake()->address(),
+        ]);
 
         Alat::create([
             'nama' => 'Proton Magnetometer',
