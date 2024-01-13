@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Admin
@@ -15,8 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->role != 'admin') {
-            return redirect()->route('layanan')->with('error', 'Maaf, Izin akses tidak terpenuhi');
+        if (Auth::check() && Auth::user()->role !== 'admin') {
+            return redirect('/layanan')->with('error', 'Maaf, Izin akses tidak terpenuhi');
         }
 
         return $next($request);

@@ -80,13 +80,14 @@ Route::middleware('auth')->group(function () {
         })->name('peta-sebaran');
     });
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(Admin::class)->prefix('admin')->name('admin.')->group(function () {
+        Route::redirect('/', 'dashboard');
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::resource('sewa-alat', AdminSewaAlatController::class);
         Route::resource('permohonan-magang', AdminPermohonanMagangController::class);
         Route::resource('klaim-asuransi', AdminKlaimAsuransiController::class);
         Route::resource('peta-sebaran', AdminPetaSebaranController::class);
-    })->middleware('auth.admin');
+    });
 });
 
 require __DIR__ . '/auth.php';
