@@ -12,7 +12,7 @@ class AdminKlaimAsuransiController extends Controller
     public function index()
     {
         $data = ['title' => 'Klaim Asuransi'];
-        return view('pages.admin.klaim-asuransi', $data);
+        return view('pages.admin.klaim-asuransi.index', $data);
     }
 
     /**

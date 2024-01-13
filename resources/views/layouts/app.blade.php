@@ -28,7 +28,7 @@
                         {{ $header }}
                     </div>
 
-                    <span class="font-bold">{{ now()->toFormattedDateString() }}</span>
+                    <span class="font-bold dark:text-white">{{ now()->toFormattedDateString() }}</span>
                 </div>
             </header>
         @endif

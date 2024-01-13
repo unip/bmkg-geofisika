@@ -12,7 +12,7 @@ class AdminPermohonanMagangController extends Controller
     public function index()
     {
         $data = ['title' => 'Permohonan Magang'];
-        return view('pages.admin.permohonan-magang', $data);
+        return view('pages.admin.permohonan-magang.index', $data);
     }
 
     /**

@@ -12,7 +12,7 @@ class AdminPetaSebaranController extends Controller
     public function index()
     {
         $data = ['title' => 'Peta Sebaran'];
-        return view('pages.admin.peta-sebaran', $data);
+        return view('pages.admin.peta-sebaran.index', $data);
     }
 
     /**

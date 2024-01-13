@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat;
+use App\Models\SewaAlat;
 use Illuminate\Http\Request;
 
 class AdminSewaAlatController extends Controller
@@ -11,11 +13,13 @@ class AdminSewaAlatController extends Controller
      */
     public function index()
     {
+
         $data = [
-            'title' => 'Sewa Alat'
+            'title' => 'Sewa Alat',
+            'permohonan' => SewaAlat::all(),
         ];
 
-        return view('pages.admin.sewa-alat', $data);
+        return view('pages.admin.sewa-alat.index', $data);
     }
 
     /**
@@ -23,7 +27,14 @@ class AdminSewaAlatController extends Controller
      */
     public function create()
     {
-        //
+        $alats = Alat::all();
+
+        $data = [
+            'title' => 'Buat Permohonan',
+            'alats' => $alats,
+        ];
+
+        return view('pages.admin.sewa-alat.create', $data);
     }
 
     /**
