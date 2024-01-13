@@ -49,7 +49,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link href="/dashboard">
+                        <x-dropdown-link href="/admin/dashboard">
                             Dashboard
                         </x-dropdown-link>
 

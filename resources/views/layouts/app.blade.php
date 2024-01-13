@@ -22,8 +22,8 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-white shadow dark:bg-gray-800">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
@@ -33,11 +33,13 @@
         <main class="relative">
             {{ $slot }}
 
-            <a href="{{ route('kontak') }}"
-                class="group fixed bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow-xl bottom-5 right-5 transition duration-200">
-                <i class="fa-regular fa-circle-question"></i>
-                Ada pertanyaan?
-            </a>
+            @if (Auth::user()->role != 'admin' || !request()->is('admin/*'))
+                <a href="{{ route('kontak') }}"
+                    class="fixed px-4 py-2 text-white transition duration-200 bg-green-500 rounded shadow-xl group hover:bg-green-600 bottom-5 right-5">
+                    <i class="fa-regular fa-circle-question"></i>
+                    Ada pertanyaan?
+                </a>
+            @endif
         </main>
     </div>
 

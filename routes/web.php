@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminKlaimAsuransiController;
+use App\Http\Controllers\AdminPermohonanMagangController;
+use App\Http\Controllers\AdminPetaSebaranController;
+use App\Http\Controllers\AdminSewaAlatController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SewaAlatController;
@@ -72,6 +77,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/peta-sebaran', function () {
             return view('pages.layanan.peta-sebaran');
         })->name('peta-sebaran');
+    });
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::resource('sewa-alat', AdminSewaAlatController::class);
+        Route::resource('permohonan-magang', AdminPermohonanMagangController::class);
+        Route::resource('klaim-asuransi', AdminKlaimAsuransiController::class);
+        Route::resource('peta-sebaran', AdminPetaSebaranController::class);
     });
 });
 

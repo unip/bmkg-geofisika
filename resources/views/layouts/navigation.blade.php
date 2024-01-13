@@ -52,7 +52,7 @@
                         </x-dropdown-link>
 
                         @if (Auth::user()->role == 'admin')
-                            <x-dropdown-link href="/dashboard">
+                            <x-dropdown-link href="/admin/dashboard">
                                 Dashboard
                             </x-dropdown-link>
                         @endif
@@ -116,7 +116,7 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                <x-dropdown-link href="/dashboard">
+                <x-dropdown-link href="/admin/dashboard">
                     Dashboard
                 </x-dropdown-link>
 
