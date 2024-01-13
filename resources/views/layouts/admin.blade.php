@@ -21,8 +21,11 @@
                         {{ $title ?? 'Title' }}
                     </h2>
 
-                    <a href="{{ route('admin.sewa-alat.create') }}"
-                        class="px-3 py-2 ml-auto text-white bg-green-500 rounded hover:bg-green-600">+ Permohonan</a>
+                    @isset($button)
+                        <div class="ml-auto">
+                            {{ $button }}
+                        </div>
+                    @endisset
                 </div>
 
                 {{ $slot }}
