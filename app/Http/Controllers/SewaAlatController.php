@@ -6,8 +6,10 @@ use App\Models\Alat;
 use App\Models\SewaAlat;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SewaAlatController extends Controller
 {
@@ -25,17 +27,20 @@ class SewaAlatController extends Controller
 
     public function store(Request $request)
     {
-        $alat = Alat::where('id', $request->input('alat_id'))->first();
-
         $validated = $request->validate([
             'alat_id' => 'required',
             'sewa_mulai' => 'required|date',
             'sewa_berakhir' => 'required|date|after_or_equal:sewa_mulai',
+            'surat_permohonan' => 'required|max:2048',
             'keterangan' => 'nullable',
             'syarat' => 'required',
         ]);
 
+        $file = $request->file('surat_permohonan');
+        $file_name = 'sewa-alat_user:' . $request->user()->id . '_date:' . Carbon::now() . '.' . $file->getClientOriginalExtension();
+        $path_permohonan = $file->storeAs('permohonan/sewa-alat', $file_name);
         $validated['user_id'] = Auth::id();
+        $validated['surat_permohonan'] = $path_permohonan;
 
         // $alat_id = $validated['alat_id'];
         // $sewa_mulai = $validated['sewa_mulai'];
@@ -76,10 +81,16 @@ class SewaAlatController extends Controller
         }
 
         try {
+            Storage::delete($sewa_alat->surat_permohonan);
             $sewa_alat->delete();
             return back()->with('success', 'Permohonan berhasil dibatalkan');
         } catch (Exception $error) {
             return back()->with('error', 'Permohonan gagal dibatalkan');
         }
+    }
+
+    public function download(SewaAlat $sewa_alat)
+    {
+        return Storage::download($sewa_alat->surat_permohonan, 'surat-permohonan');
     }
 }

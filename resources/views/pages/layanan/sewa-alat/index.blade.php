@@ -44,7 +44,8 @@
                     </div>
                 @endif
 
-                <form action="{{ route('sewa-alat.store') }}" method="POST" class="grid grid-cols-1 gap-3">
+                <form action="{{ route('sewa-alat.store') }}" method="POST" class="grid grid-cols-1 gap-3"
+                    enctype="multipart/form-data">
                     @csrf @method('post')
 
                     <div class="flex gap-3 *:flex-1">
@@ -87,6 +88,18 @@
                     </div>
 
                     <div>
+                        <x-input-label for="surat_permohonan">Surat Permohonan</x-input-label>
+                        <div
+                            class="block mt-1 border border-gray-300 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300">
+                            <span class="sr-only">Pilih file permohonan</span>
+                            <input type="file" accept=".png,.jpg,.jpeg,.pdf" name="surat_permohonan"
+                                id="surat_permohonan"
+                                class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-s-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 hover:file:cursor-pointer" />
+                        </div>
+                        <x-input-error :messages="$errors->get('surat_permohonan')" class="mt-2" />
+                    </div>
+
+                    <div>
                         <x-input-label for="keterangan">Keterangan</x-input-label>
                         <textarea id="keterangan"
                             class="block w-full mt-1 border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
@@ -111,7 +124,8 @@
                     expanded: false,
                     showModalBatalPermohonan: false,
                     data: { id: null, namaAlat: null, tanggalSewa: null, unit: null, status: null, total: null, expedisi: null, resi: null },
-                    action: null
+                    action: null,
+                    download: null,
                 }" class="flex flex-col h-full p-6 text-gray-900 dark:text-gray-100">
                     <h2
                         class="flex items-center mb-4 text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
@@ -159,6 +173,7 @@
                                             data.status = `{{ $item->status }}`;
                                             data.total = `{{ $total }}`;
                                             action = `{{ route('sewa-alat.destroy', ['sewa_alat' => $item]) }}`;
+                                            download = `{{ route('sewa-alat.download-permohonan', ['sewa_alat' => $item]) }}`;
 
                                             @if ($item->expedisi != null && $item->resi != null) data.expedisi = `{{ $item->expedisi }}`;
                                                 data.resi = `{{ $item->resi }}`; @endif
@@ -227,6 +242,15 @@
 
                                     <dt class="text-sm text-slate-500">Total Biaya</dt>
                                     <dd x-text="data.total"></dd>
+
+                                    <dt class="text-sm text-slate-500">File Permohonan</dt>
+                                    <dd>
+                                        <a :href="download"
+                                            class="font-bold text-green-500 hover:text-green-700">
+                                            Download
+                                            <i class="fa-solid fa-file-arrow-down"></i>
+                                        </a>
+                                    </dd>
 
                                     <div x-show="data.expedisi">
                                         <dt class="text-sm text-slate-500">Pengiriman</dt>

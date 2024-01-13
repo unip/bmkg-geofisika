@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sewa_mulai');
             $table->string('sewa_berakhir');
             $table->integer('banyak_unit')->default(1);
+            $table->string('surat_permohonan');
             $table->text('keterangan')->nullable();
             $table->string('status')->default('Belum Lunas');
             $table->string('expedisi')->nullable();
