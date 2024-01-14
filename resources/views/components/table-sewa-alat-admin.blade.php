@@ -134,8 +134,9 @@
 
                 <div class="flex flex-col">
                     <a :href="edit"
-                        class="w-full p-3 mt-5 text-center text-gray-600 uppercase border border-gray-600 rounded hover:bg-gray-500 hover:text-white ms-auto">Edit
-                        Permohonan</a>
+                        class="w-full p-3 mt-5 text-center text-gray-600 uppercase border border-gray-600 rounded dark:text-white dark:border-gray-500 hover:bg-gray-500 hover:text-white ms-auto">
+                        Edit Permohonan
+                    </a>
                     <button type="button" @click="showModalPermohonan = false; showModalBatalPermohonan = true"
                         class="w-full p-3 mt-5 text-center text-white uppercase bg-red-400 rounded hover:bg-red-500 ms-auto">Batal
                         Permohonan</button>

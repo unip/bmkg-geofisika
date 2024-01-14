@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('magangs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('universitas');
             $table->string('fakultas');
             $table->string('prodi');
