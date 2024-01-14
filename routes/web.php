@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminPermohonanMagangController;
 use App\Http\Controllers\AdminPetaSebaranController;
 use App\Http\Controllers\AdminSewaAlatController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\MagangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SewaAlatController;
 use App\Http\Middleware\Admin;
@@ -67,9 +68,9 @@ Route::middleware('auth')->group(function () {
                 Route::get('/permohonan/{sewa_alat}/download', 'download')->name('download-permohonan'); // download permohonan
             });
 
-        Route::get('/permohonan-magang', function () {
-            return view('pages.layanan.permohonan-magang');
-        })->name('permohonan-magang');
+        Route::resource('permohonan-magang', MagangController::class);
+        Route::get('permohonan-magang/{permohonan_magang}', [MagangController::class, 'download'])
+            ->name('permohonan-magang.download');
 
         Route::get('/klaim-asuransi', function () {
             return view('pages.layanan.klaim-asuransi');

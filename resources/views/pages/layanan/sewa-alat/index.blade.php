@@ -13,7 +13,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-3 lg:py-6">
         <div class="grid grid-cols-1 mx-auto gap-y-3 lg:gap-x-3 lg:grid-cols-3 max-w-7xl sm:px-6 lg:px-8">
             @include('components.form-sewa-alat-permohonan', ['alats' => $alats])
             @include('components.table-sewa-alat-permohonan', ['permohonan' => $permohonan])
