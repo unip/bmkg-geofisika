@@ -90,7 +90,7 @@
             <div>
                 <x-input-label for="surat_permohonan">{{ $is_edit ? 'Update' : '' }} Surat Permohonan</x-input-label>
                 <div class="flex items-stretch w-full gap-3 mt-1">
-                    @if ($is_edit)
+                    @if ($is_edit && $permohonan->surat_permohonan)
                         <a class="flex items-center px-3 border border-gray-300 rounded"
                             href="{{ route('sewa-alat.download-permohonan', ['sewa_alat' => $permohonan]) }}">
                             <i class="fa-solid fa-file-arrow-down"></i> &nbsp; Download

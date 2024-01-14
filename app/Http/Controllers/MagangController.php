@@ -6,6 +6,7 @@ use App\Models\Magang;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MagangController extends Controller
@@ -45,6 +46,8 @@ class MagangController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'syarat' => 'required',
         ]);
+
+        $validated['user_id'] = Auth::id();
 
         try {
             $validated['user_id'] = Auth::user()->id;
