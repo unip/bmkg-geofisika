@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Alat;
 use App\Models\SewaAlat;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminSewaAlatController extends Controller
 {
@@ -42,7 +46,28 @@ class AdminSewaAlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'alat_id' => 'required',
+            'banyak_unit' => 'required|numeric',
+            'sewa_mulai' => 'required|date',
+            'sewa_berakhir' => 'required|date|after_or_equal:sewa_mulai',
+            'surat_permohonan' => 'required|max:2048',
+            'keterangan' => 'nullable',
+        ]);
+
+        $file = $request->file('surat_permohonan');
+        $file_name = 'sewa-alat_user:' . $request->user()->id . '_date:' . Carbon::now() . '.' . $file->getClientOriginalExtension();
+        $path_permohonan = $file->storeAs('permohonan/sewa-alat', $file_name);
+        $validated['user_id'] = Auth::id();
+        $validated['surat_permohonan'] = $path_permohonan;
+
+        try {
+            SewaAlat::create($validated);
+            return redirect()->route('admin.sewa-alat.create')->with('success', 'Permohonan berhasil dibuat');
+        } catch (Exception $error) {
+            report($error->getMessage());
+            return redirect()->route('admin.sewa-alat.create')->with('error', 'Permohonan gagal dibuat');
+        }
     }
 
     /**
@@ -58,15 +83,51 @@ class AdminSewaAlatController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $alats = Alat::all();
+        $permohonan = SewaAlat::where('id', $id)->first();
+
+        $data = [
+            'title' => 'Update Permohonan',
+            'alats' => $alats,
+            'permohonan' => $permohonan,
+        ];
+
+        return view('pages.admin.sewa-alat.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, SewaAlat $sewa_alat)
     {
-        //
+        $validated = $request->validate([
+            'alat_id' => 'required',
+            'banyak_unit' => 'required|numeric',
+            'status' => 'required',
+            'sewa_mulai' => 'required|date',
+            'sewa_berakhir' => 'required|date|after_or_equal:sewa_mulai',
+            'surat_permohonan' => 'nullable|max:2048',
+            'keterangan' => 'nullable',
+        ]);
+
+        $validated['user_id'] = Auth::id();
+
+        if (array_key_exists('surat_permohonan', $validated)) {
+            Storage::delete($sewa_alat->surat_permohonan);
+
+            $file = $request->file('surat_permohonan');
+            $file_name = 'sewa-alat_user:' . $request->user()->id . '_date:' . Carbon::now() . '.' . $file->getClientOriginalExtension();
+            $path_permohonan = $file->storeAs('permohonan/sewa-alat', $file_name);
+            $validated['surat_permohonan'] = $path_permohonan;
+        }
+
+        try {
+            $sewa_alat->update($validated);
+            return redirect()->route('admin.sewa-alat.index')->with('success', 'Permohonan berhasil diupdate');
+        } catch (Exception $error) {
+            report($error->getMessage());
+            return redirect()->route('admin.sewa-alat.edit')->with('error', 'Permohonan gagal diupdate');
+        }
     }
 
     /**

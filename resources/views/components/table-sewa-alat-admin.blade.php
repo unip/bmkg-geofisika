@@ -3,6 +3,7 @@
     expanded: false,
     showModalBatalPermohonan: false,
     data: { id: null, namaAlat: null, tanggalSewa: null, unit: null, status: null, total: null, expedisi: null, resi: null },
+    edit: null,
     action: null,
     download: null,
 }" class="flex flex-col h-full text-gray-900 dark:text-gray-100">
@@ -43,6 +44,7 @@
                                             data.unit = `{{ $item->banyak_unit }}`;
                                             data.status = `{{ $item->status }}`;
                                             data.total = `{{ $total }}`;
+                                            edit = `{{ route('admin.sewa-alat.edit', ['sewa_alat' => $item]) }}`;
                                             action = `{{ route('sewa-alat.destroy', ['sewa_alat' => $item]) }}`;
                                             download = `{{ route('sewa-alat.download-permohonan', ['sewa_alat' => $item]) }}`;
 
@@ -130,9 +132,14 @@
                     </div>
                 </dl>
 
-                <button type="button" @click="showModalPermohonan = false; showModalBatalPermohonan = true"
-                    class="w-full p-3 mt-5 text-center text-white uppercase bg-red-400 rounded hover:bg-red-500 ms-auto">Batal
-                    Permohonan</button>
+                <div class="flex flex-col">
+                    <a :href="edit"
+                        class="w-full p-3 mt-5 text-center text-gray-600 uppercase border border-gray-600 rounded hover:bg-gray-500 hover:text-white ms-auto">Edit
+                        Permohonan</a>
+                    <button type="button" @click="showModalPermohonan = false; showModalBatalPermohonan = true"
+                        class="w-full p-3 mt-5 text-center text-white uppercase bg-red-400 rounded hover:bg-red-500 ms-auto">Batal
+                        Permohonan</button>
+                </div>
             </div>
         </div>
     </div>
