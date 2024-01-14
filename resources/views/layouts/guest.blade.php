@@ -18,12 +18,12 @@
 
 <body class="font-sans antialiased text-gray-900">
     <div
-        class="min-h-screen flex flex-col sm:justify-center items-center !pt-[140px] !pb-[100px] sm:pt-0 bg-[linear-gradient(rgba(0,0,0,0.4),rgba(10,30,0,0.6)),url('/public/images/slides/1.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
+        class="min-h-screen flex flex-col sm:justify-center items-center !pt-[140px] !pb-[100px] sm:pt-0 bg-[linear-gradient(rgba(0,0,0,0.4),rgba(10,30,0,0.6)),url('/public/images/slides/8.jpg')] bg-cover bg-no-repeat bg-fixed bg-center">
         <div>
             <a href="/" class="flex flex-col items-center gap-3">
                 {{-- <x-application-logo class="w-20 h-20 text-gray-500 fill-current" /> --}}
                 <img src="{{ asset('/images/logo-bmkg.png') }}" alt="BMKG" width="100" height="100">
-                <span class="text-2xl font-bold text-white">BMKG Yogyakarta</span>
+                <span class="text-2xl font-bold text-white">Stasiun Geofisika Yogyakarta</span>
             </a>
         </div>
 
