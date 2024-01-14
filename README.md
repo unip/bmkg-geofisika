@@ -20,6 +20,7 @@
 - Migrate database: `php artisan migrate:fresh`
 - Optimize project: `php artisan optimize`
 - Start projet! `php artisan serve`
+- Buka terminal baru `npm run dev`
 
 ## Kelompok:
 - Afif Whelly Artissandi
