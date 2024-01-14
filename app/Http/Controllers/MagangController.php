@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Magang;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,6 +47,7 @@ class MagangController extends Controller
         ]);
 
         try {
+            $validated['user_id'] = Auth::user()->id;
             Magang::create($validated);
             return back()->with('success', 'Permohonan magang berhasil dibuat');
         } catch (Exception $error) {

@@ -38,8 +38,11 @@
                                 $diff = $date1->diff($date2)->days;
                                 $lama_sewa = $diff == 0 ? 1 : $diff;
 
+
                                 $total = 'Rp' . number_format($item->alat->harga * ($lama_sewa * $item->banyak_unit), 0, ',', '.');
-                            @endphp
+                                $tagihan = 'Rp' . number_format($item->alat->harga * ($lama_sewa * $item->banyak_unit) + $item->id, 0, ',', '.');
+                                $invoice = 'INV#'.sprintf('%04d',$item->id);
+                                $batasbayar =  date("d/m/Y H:i",time() + 1800);                            @endphp
                             <tr class="transition duration-200 border-b hover:cursor-pointer border-b-slate-300 dark:border-b-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
                                 @click="
                                             showModalPermohonan = true;
@@ -50,6 +53,9 @@
                                             data.unit = `{{ $item->banyak_unit }}`;
                                             data.status = `{{ $item->status }}`;
                                             data.total = `{{ $total }}`;
+                                            data.tagihan = `{{ $tagihan }}`;
+                                            data.invoice = `{{ $invoice }}`;
+                                            data.batasbayar = `{{ $batasbayar }}`;
                                             action = `{{ route('sewa-alat.destroy', ['sewa_alat' => $item]) }}`;
                                             download = `{{ route('sewa-alat.download-permohonan', ['sewa_alat' => $item]) }}`;
 
@@ -87,7 +93,7 @@
             x-transition.opacity x-cloak>
 
             <!-- Modal inner -->
-            <div class="w-full max-w-sm p-6 mx-auto mt-20 mb-10 text-left bg-white rounded-lg shadow-lg dark:bg-slate-800"
+            <div class="w-full max-w-xl p-6 mx-auto mt-20 mb-10 text-left bg-white rounded-lg shadow-lg dark:bg-slate-800"
                 @click.away="showModalPermohonan = false" x-transition>
                 <!-- Title / Close-->
                 <div class="flex items-center justify-between mb-5">
@@ -142,16 +148,25 @@
                         <h3 class="block font-bold">Panduan
                             Pembayaran:</h3>
                         <p x-show="expanded" x-collapse>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quidem
-                            similique atque explicabo, est optio hic fuga ex! Possimus facere saepe debitis
-                            expedita velit quisquam excepturi laborum temporibus iusto architecto ipsum
-                            nobis quidem consequuntur ipsa ducimus totam voluptate consequatur quia tenetur
-                            mollitia, officia delectus id quaerat dicta. Cumque, corporis similique ex
-                            provident incidunt non enim dicta! Atque error unde adipisci consequatur sequi
-                            cum possimus blanditiis quis aperiam, consequuntur voluptas id nemo, dolores
-                            iure? Ipsam, ipsa vitae, doloribus iure tempore possimus, doloremque culpa illum
-                            tenetur voluptas nostrum labore! Eius corporis voluptates, qui quae nihil
-                            exercitationem, vero suscipit maiores aut laboriosam consequatur.</p>
+                            Untuk memudahkan proses pembayaran, berikut adalah panduan pembayaran kami:
+                            <br><br>
+                            <b>1. Metode Pembayaran:</b><br>
+                            Transfer Bank:<br>
+                            Nama Bank: Mandiri<br>
+                            Nomor Rekening: 137001521521<br>
+                            Nama Pemilik Rekening: Wuri Handayani<br><br>
+                            <b>2. Detail Tagihan:</b><br>
+                            Nomor Invoice/Faktur:<br>
+                            <span x-text="data.invoice"></span><br>
+                            Jumlah Pembayaran:<br>
+                            <span x-text="data.tagihan"></span><br><br>
+                            <b>3. Batas Waktu Pembayaran:</b><br>
+                            Pembayaran diharapkan diterima paling lambat pada <span x-text="data.batasbayar"></span>.<br> Jika pembayaran tidak diterima pada waktu yang ditentukan, pesaan akan dibatalkan secara otomatis.<br><br>
+                            <b>4. Konfirmasi Pembayaran:</b><br>
+                            Mohon konfirmasikan pembayaran Anda dengan mengirimkan bukti transfer atau konfirmasi pembayaran ke stageof.yogya@bmkg.go.id.<br><br>
+                            <b>5. Hubungi Kami:</b><br>
+                            Jika Anda memiliki pertanyaan atau memerlukan bantuan lebih lanjut, jangan ragu untuk menghubungi tim kami melalui [Nomor Telepon] atau stageof.yogya@bmkg.go.id.<br>
+                            Terima kasih atas kerjasama Anda! Kami berharap dapat terus memberikan layanan terbaik untuk Anda.</p>
                     </div>
 
                     <button type="button" @click="showModalPermohonan = false; showModalBatalPermohonan = true"

@@ -110,7 +110,7 @@ class AdminSewaAlatController extends Controller
             'keterangan' => 'nullable',
         ]);
 
-        $validated['user_id'] = Auth::id();
+        // $validated['user_id'] = Auth::id();
 
         if (array_key_exists('surat_permohonan', $validated)) {
             Storage::delete($sewa_alat->surat_permohonan);

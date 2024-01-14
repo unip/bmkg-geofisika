@@ -2,7 +2,7 @@
     showModalPermohonan: false,
     expanded: false,
     showModalBatalPermohonan: false,
-    data: { id: null, namaAlat: null, tanggalSewa: null, unit: null, status: null, total: null, expedisi: null, resi: null },
+    data: { id: null, namaAlat: null, tanggal: null, unit: null, status: null, total: null, expedisi: null, resi: null },
     edit: null,
     action: null,
     download: null,
@@ -17,63 +17,42 @@
             <table class="w-full overflow-hidden rounded table-auto text-slate-600 dark:text-slate-400">
                 <thead class="border-b bg-slate-100 dark:bg-slate-900 border-b-slate-300 dark:border-b-slate-500">
                     <tr>
-                        <th class="p-3 text-left">Peminjam</th>
-                        <th class="p-3 text-left">Barang</th>
-                        <th class="p-3 text-left">Tanggal Sewa</th>
-                        <th class="p-3 text-left">Unit</th>
+                        <th class="p-3 text-left">Nama</th>
+                        <th class="p-3 text-left">Program Studi</th>
+                        <th class="p-3 text-left">Tanggal Magang</th>
                         <th class="p-3 text-left">Status</th>
-                        <th class="p-3 text-left">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($permohonan as $item)
-                        @php
-                            $date1 = new DateTime($item->sewa_mulai);
-                            $date2 = new DateTime($item->sewa_berakhir);
-                            $diff = $date1->diff($date2)->days;
-                            $lama_sewa = $diff == 0 ? 1 : $diff;
-
-                            $total = 'Rp' . number_format($item->alat->harga * ($lama_sewa * $item->banyak_unit), 0, ',', '.');
-                        @endphp
                         <tr class="transition duration-200 border-b hover:cursor-pointer border-b-slate-300 dark:border-b-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
                             @click="
-                                        showModalPermohonan = true;
-                                        expanded = false;
-                                        data.id = `{{ $item->id }}`;
-                                        data.namaUser = `{{ $item->user->nama }}`;
-                                        data.namaAlat = `{{ $item->alat->nama }}`;
-                                        data.tanggalSewa = `{{ $item->sewa_mulai }} s/d {{ $item->sewa_berakhir }}`;
-                                        data.unit = `{{ $item->banyak_unit }}`;
-                                        data.status = `{{ $item->status }}`;
-                                        data.total = `{{ $total }}`;
-                                        edit = `{{ route('admin.sewa-alat.edit', ['sewa_alat' => $item]) }}`;
-                                        action = `{{ route('sewa-alat.destroy', ['sewa_alat' => $item]) }}`;
-                                        download = `{{ route('sewa-alat.download-permohonan', ['sewa_alat' => $item]) }}`;
-
-                                        @if ($item->expedisi != null && $item->resi != null) data.expedisi = `{{ $item->expedisi }}`;
-                                            data.resi = `{{ $item->resi }}`; @endif
-                                    ">
+                                showModalPermohonan = true;
+                                expanded = false;
+                                data.id = `{{ $item->id }}`;
+                                data.universitas = `{{ $item->universitas }}`;
+                                data.fakultas = `{{ $item->fakultas }}`;
+                                data.prodi = `{{ $item->prodi }}`;
+                                data.tanggal = `{{ $item->tanggal_mulai }} s/d {{ $item->tanggal_selesai }}`;
+                                data.status = `{{ $item->status }}`;
+                                edit = `{{ route('admin.permohonan-magang.edit', ['permohonan_magang' => $item]) }}`;
+                                action = `{{ route('permohonan-magang.destroy', ['permohonan_magang' => $item]) }}`;
+                                ">
                             <td class="p-3 align-top max-w-[200px]">
                                 {{ $item->user->name }}
                             </td>
                             <td class="p-3 align-top max-w-[200px]">
-                                {{ $item->alat->nama }}
+                                {{ $item->prodi }} {{ $item->fakultas }} {{ $item->universitas }} 
                             </td>
                             <td class="p-3 align-top">
-                                <span>{{ \Carbon\Carbon::parse($item->sewa_mulai)->format('d/m/Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($item->tanggal_mulai)->format('d/m/Y') }}</span>
                                 -
-                                <span>{{ \Carbon\Carbon::parse($item->sewa_berakhir)->format('d/m/Y') }}</span>
-                            </td>
-                            <td class="p-3 align-top">
-                                {{ $item->banyak_unit }} unit
+                                <span>{{ \Carbon\Carbon::parse($item->tanggal_selesai)->format('d/m/Y') }}</span>
                             </td>
                             <td class="p-3 align-top">
                                 <span class="font-bold text-yellow-500">
                                     {{ $item->status }}
                                 </span>
-                            </td>
-                            <td class="p-3 font-bold align-top dark:text-white">
-                                {{ $total }}
                             </td>
                         </tr>
                     @endforeach
@@ -105,36 +84,28 @@
             <!-- content -->
             <div class="modal-content">
                 <dl class="grid grid-cols-2 gap-y-3">
-                    <dt class="text-sm text-slate-500">Nama Alat</dt>
-                    <dd x-text="data.namaAlat"></dd>
+                    <dt class="text-sm text-slate-500">Universitas</dt>
+                    <dd x-text="data.universitas"></dd>
 
-                    <dt class="text-sm text-slate-500">Tanggal Sewa</dt>
-                    <dd x-text="data.tanggalSewa"></dd>
+                    <dt class="text-sm text-slate-500">Fakultas</dt>
+                    <dd x-text="data.fakultas"></dd>
 
-                    <dt class="text-sm text-slate-500">Jumlah Unit</dt>
-                    <dd x-text="data.unit"></dd>
+                    <dt class="text-sm text-slate-500">Program Studi</dt>
+                    <dd x-text="data.prodi"></dd>
+
+                    <dt class="text-sm text-slate-500">Tanggal</dt>
+                    <dd x-text="data.tanggal"></dd>
 
                     <dt class="text-sm text-slate-500">Status</dt>
                     <dd x-text="data.status"></dd>
 
-                    <dt class="text-sm text-slate-500">Total Biaya</dt>
-                    <dd x-text="data.total"></dd>
-
-                    <dt class="text-sm text-slate-500">File Permohonan</dt>
-                    <dd>
+                    <dt x-show="data.status !== `Menunggu`" class="text-sm text-slate-500">Surat Ijin Magang</dt>
+                    <dd x-show="data.status !== `Menunggu`">
                         <a :href="download" class="font-bold text-green-500 hover:text-green-700">
                             Download
                             <i class="fa-solid fa-file-arrow-down"></i>
                         </a>
                     </dd>
-
-                    <div x-show="data.expedisi">
-                        <dt class="text-sm text-slate-500">Pengiriman</dt>
-                        <dd>
-                            <p x-text="data.expedisi"></p>
-                            <p x-text="data.resi"></p>
-                        </dd>
-                    </div>
                 </dl>
 
                 <div class="flex flex-col">
