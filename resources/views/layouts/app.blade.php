@@ -38,7 +38,7 @@
             {{ $slot }}
 
             @if (Auth::user()->role != 'admin' || !request()->is('admin/*'))
-                <a href="{{ route('kontak') }}"
+                <a href="https://wa.link/j5p51g" target="_blank"
                     class="fixed px-4 py-2 text-white transition duration-200 bg-green-500 rounded shadow-xl group hover:bg-green-600 bottom-5 right-5">
                     <i class="fa-regular fa-circle-question"></i>
                     Ada pertanyaan?
