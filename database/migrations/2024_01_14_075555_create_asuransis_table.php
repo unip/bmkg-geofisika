@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('asuransis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('universitas');
-            $table->string('fakultas');
-            $table->string('prodi');
-            $table->string('tanggal_mulai');
-            $table->string('tanggal_selesai');
+            $table->string('perusahaan');
+            $table->string('tanggal');
+            $table->string('lokasi');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('kejadian');
             $table->string('status')->default('Menunggu');
-            $table->string('surat_ijin_magang')->nullable();
+            $table->string('surat_permohonan')->nullable();
             $table->timestamps();
         });
     }

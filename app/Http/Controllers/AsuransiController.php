@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Magang;
+use App\Models\Asuransi;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MagangController extends Controller
+class AsuransiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $permohonan = Magang::all();
+        $permohonan = Asuransi::all();
         $data = [
-            'title' => 'Permohonan Magang',
+            'title' => 'Permohonan Asuransi',
             'permohonan' => $permohonan,
         ];
 
-        return view('pages.layanan.permohonan-magang', $data);
+        return view('pages.layanan.klaim-asuransi', $data);
     }
 
     /**
@@ -38,22 +39,22 @@ class MagangController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'universitas' => 'required',
-            'fakultas' => 'required',
-            'prodi' => 'required',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-            'syarat' => 'required',
+            'perusahaan' => 'required',
+            'tanggal' => 'required|date|before_or_equal:'.Carbon::now(),
+            'lokasi' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'kejadian' => 'required',
         ]);
 
         $validated['user_id'] = Auth::id();
 
         try {
-            Magang::create($validated);
-            return back()->with('success', 'Permohonan magang berhasil dibuat');
+            Asuransi::create($validated);
+            return back()->with('success', 'Permohonan klaim asuransi berhasil dibuat');
         } catch (Exception $error) {
             report($error->getMessage());
-            return back()->with('error', 'Permohonan magang gagal dibuat');
+            return back()->with('error', 'Permohonan klaim asuransi gagal dibuat');
         }
     }
 
@@ -84,20 +85,20 @@ class MagangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Magang $permohonan_magang)
+    public function destroy(Asuransi $klaim_asuransi)
     {
         try {
-            Storage::delete($permohonan_magang->surat_ijin_magang);
-            $permohonan_magang->delete();
-            return back()->with('success', 'Permohonan magang berhasil dihapus');
+            // Storage::delete($permohonan_asuransi->surat_permohonan_klaim);
+            $klaim_asuransi->delete();
+            return back()->with('success', 'Permohonan klaim asuransi berhasil dihapus');
         } catch (Exception $error) {
             report($error->getMessage());
-            return back()->with('error', 'Permohonan magang gagal dihapus');
+            return back()->with('error', 'Permohonan klaim asuransi gagal dihapus');
         }
     }
 
-    public function download(Magang $permohonan_magang)
+    public function download(Asuransi $klaim_asuransi)
     {
-        Storage::download($permohonan_magang->surat_ijin_magang);
+        Storage::download($klaim_asuransi->surat_permohonan_klaim);
     }
 }

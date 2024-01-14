@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminKlaimAsuransiController;
 use App\Http\Controllers\AdminPermohonanMagangController;
 use App\Http\Controllers\AdminPetaSebaranController;
 use App\Http\Controllers\AdminSewaAlatController;
+use App\Http\Controllers\AsuransiController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\ProfileController;
@@ -72,9 +73,9 @@ Route::middleware('auth')->group(function () {
         Route::get('permohonan-magang/{permohonan_magang}', [MagangController::class, 'download'])
             ->name('permohonan-magang.download');
 
-        Route::get('/klaim-asuransi', function () {
-            return view('pages.layanan.klaim-asuransi');
-        })->name('klaim-asuransi');
+        Route::resource('klaim-asuransi', AsuransiController::class);
+        Route::get('klaim-asuransi/{klaim_asuransi}', [AsuransiController::class, 'download'])
+            ->name('klaim-asuransi.download');
 
         Route::get('/peta-sebaran', function () {
             return view('pages.layanan.peta-sebaran');
