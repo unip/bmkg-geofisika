@@ -18,9 +18,9 @@
                     <x-nav-link :href="route('layanan')" :active="request()->is('layanan*')">
                         {{ __('Layanan') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('berita')" :active="request()->is('berita*')">
+                    {{-- <x-nav-link :href="route('berita')" :active="request()->is('berita*')">
                         {{ __('Berita') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('kontak')" :active="request()->is('kontak*')">
                         {{ __('Hubungi kami') }}
                     </x-nav-link>

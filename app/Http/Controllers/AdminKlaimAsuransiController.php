@@ -26,8 +26,6 @@ class AdminKlaimAsuransiController extends Controller
      */
     public function create()
     {
-        $magangs = Asuransi::all();
-
         $data = [
             'title' => 'Buat Permohonan',
         ];

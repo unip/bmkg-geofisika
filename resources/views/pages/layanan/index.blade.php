@@ -18,12 +18,12 @@
             'url' => '/layanan/klaim-asuransi',
             'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.',
         ],
-        [
-            'images' => '/images/layanan-peta-sebaran.svg',
-            'nama' => 'Peta Sebaran',
-            'url' => '/layanan/peta-sebaran',
-            'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.',
-        ],
+        // [
+        //     'images' => '/images/layanan-peta-sebaran.svg',
+        //     'nama' => 'Peta Sebaran',
+        //     'url' => '/layanan/peta-sebaran',
+        //     'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sapiente recusandae mollitia omnis alias possimus officia.',
+        // ],
     ];
 
 @endphp
@@ -53,7 +53,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="mb-3 text-3xl font-bold">Layanan kami</h3>
                     <div
-                        class="grid grid-cols-2 p-5 rounded-lg lg:grid-cols-4 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg">
+                        class="grid grid-cols-2 p-5 rounded-lg lg:grid-cols-3 gap-x-3 gap-y-5 bg-gray-100/50 dark:bg-gray-700/50 backdrop-blur-lg">
                         {{-- @dd($layanan[0]['images']) --}}
                         @foreach ($layanan as $item)
                             <a href="{{ $item['url'] }}"

@@ -25,8 +25,6 @@ class AdminPermohonanMagangController extends Controller
      */
     public function create()
     {
-        $magangs = Magang::all();
-
         $data = [
             'title' => 'Buat Permohonan',
         ];
