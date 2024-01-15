@@ -76,10 +76,6 @@ class SewaAlatController extends Controller
 
     public function destroy(SewaAlat $sewa_alat)
     {
-        if ($sewa_alat->status != 'Menunggu' && $sewa_alat->status != 'Belum Lunas') {
-            return back()->with('error', 'Permohonan tidak dapat dibatalkan karena dalam proses validasi');
-        }
-
         try {
             Storage::delete($sewa_alat->surat_permohonan);
             $sewa_alat->delete();

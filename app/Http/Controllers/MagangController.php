@@ -86,8 +86,11 @@ class MagangController extends Controller
      */
     public function destroy(Magang $permohonan_magang)
     {
-        try {
+        if ($permohonan_magang->surat_ijin_magang) {
             Storage::delete($permohonan_magang->surat_ijin_magang);
+        }
+
+        try {
             $permohonan_magang->delete();
             return back()->with('success', 'Permohonan magang berhasil dihapus');
         } catch (Exception $error) {
