@@ -14,7 +14,7 @@ class AdminController extends Controller
         $sewa_alat = SewaAlat::all();
         $magang = Magang::all();
         $asuransi = Asuransi::all();
-        $permohonan = collect([]);
+        $permohonan = collect([...$sewa_alat, ...$magang, ...$asuransi]);
 
         $data = [
             'title' => 'Dashboard',
