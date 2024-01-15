@@ -74,7 +74,7 @@
                 @php
                     $kejadian = ['Petir','Gempa Bumi'];
                 @endphp
-                <option value="">Pilih kejadian...</option>
+                <option value="">Pilih jenis data...</option>
                 @foreach ($kejadian as $item)
                     <option value="{{ $item }}" @selected(old('status') == $item)>{{ $item }}
                     </option>
