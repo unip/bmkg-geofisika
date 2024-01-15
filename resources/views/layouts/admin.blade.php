@@ -15,7 +15,7 @@
         <div class="grid grid-cols-1 mx-auto gap-y-3 lg:gap-x-5 lg:grid-cols-4 max-w-7xl sm:px-6 lg:px-8">
             @include('components.admin-sidebar')
 
-            <main class="col-span-3 p-6 bg-white rounded-lg dark:bg-gray-800">
+            <div class="flex flex-col col-span-3 gap-3 p-6 bg-white rounded-lg dark:bg-gray-800">
                 <div class="flex items-center mb-4">
                     <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                         {{ $title ?? 'Title' }}
@@ -29,7 +29,7 @@
                 </div>
 
                 {{ $slot }}
-            </main>
+            </div>
         </div>
     </div>
 
